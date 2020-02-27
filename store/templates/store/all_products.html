@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block customCss %}
+    <link rel="stylesheet" href="{% static 'css/store.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="store">
+    {% for product in products %}
+        {% if product.available == True %}
+            <div class="product">
+                
+                <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/def.jpeg' %}  {% endif %}" alt="{{ product.name }}" class="img-fluid" width="300px" height="400px">
+                
+                <div class="product_all_data">
+                    <h2>
+                        {{ product.name }}
+                    </h2>
+                    
+                    <p>
+                        {{ product.price }} PLN
+                    </p>
+
+                    <button><a href="{{ product.get_absolute_url }}">
+                            Pokaż
+                    </a></button>
+                </div>
+                
+            </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}
+
+<!--
+<div class="product">  
+    <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/def.jpeg' %}  {% endif %}" class="img-fluid">
+    <h1>{{ product.name }}</h1>
+    <h3>{{ product.price }} PLN</h3>
+    <a href="{{ product.get_absolute_url }}"><button>Pokaż</button></a>
+</div>
+-->

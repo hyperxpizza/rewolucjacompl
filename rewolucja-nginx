@@ -1,0 +1,19 @@
+server {
+        listen 80;
+        server_name 46.41.135.147;
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location /static/ {
+                root /home/fracu/strona/rewolucja;
+        }
+
+        location /media/ {
+                root /home/fracu/strona/rewolucja;
+        }
+
+        location / {
+                include proxy_params;
+                proxy_pass http://unix:/run/gunicorn.sock;
+        }
+}
+

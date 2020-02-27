@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customCss %}
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock customCss %}
+
+
+{% block content %}
+<div class="row" id="contact_row">
+    <div class="col-sm">
+        <a href="https://www.facebook.com/rewolucjawtwoimdomu/"><i class="fab fa-facebook-square"></i></a>
+    </div>
+    <div class="col-sm">
+        <a href="https://www.instagram.com/rewolucja.studio"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="col-sm">
+        <a href="{% url 'pages:contact_mail' %}"><i class="fas fa-envelope"></i></a>
+    </div>
+</div>
+{% endblock content %}
+

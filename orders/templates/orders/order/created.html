@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block customCss %}
+    <link rel="stylesheet" href="{% static 'css/orders.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 6%">
+            <div class="col-lg col-lg-offset-2">
+                <div id="order">
+                    <h3 class="page-header">Dziękujemy za zakupy u nas!
+                    </h3>
+
+                    <p>Twoje zamówienie zostało złożone. Numer twojego zamówienia to: 
+                        <strong>{{ order.id }}</strong>
+                    </p>
+                    <p>
+                        E-mail z potwierdzeniem został wysłany na :
+                        <strong>{{ order.email }}</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

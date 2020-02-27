@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block customCss %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="blog">
+        {% for post in posts %}
+            <div class="post_area">
+                <h2>
+                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                </h2>
+                
+                <p class="date">
+                    Opublikowany {{post.publish}}
+                </p>
+
+                {{ post.text|truncatewords:30|linebreaks|safe|striptags }}
+            </div>
+        {% endfor %}
+    
+    </div>
+
+{% endblock %}

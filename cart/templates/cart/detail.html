@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block customCss %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="cart-container">
+        <div class="row" style="margin-top: 6%">
+            {% with totail_items=cart|length %}
+            <h2>
+                {% if cart|length > 0 %}
+                    Twój koszyk:
+                {% else %}
+                    Twój koszyk jest pusty.
+                {% endif %}
+            {% endwith %}
+            </h2>
+            
+            <table class="table" style="color:white;">
+                <thead>
+                    <tr>
+                        <th>Zdjęcie</th>
+                        <th>Produkt</th>
+                        <th>Ilość</th>
+                        <th>Usuń</th>
+                        <th>Cena</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in cart %}
+                    {% with product=item.product  %}
+                        <div class="order">
+                        <tr>
+                            <td>
+                                <a href="{{ product.get_absolute_url }}">
+                                    <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="..." style="height: 130px; width: auto">
+                                </a>
+                            </td>
+                            <td>{{ product.name }}</td>
+                            <td>
+                                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                    {% csrf_token %}
+                                    {{ item.update_quantity_form.quantity }}
+                                    {{ item.update_quantity_form.update }}
+                                    <button type="submit">Zmień</button>
+                                </form>
+                            </td>
+                            <td>
+                                <a href="{% url "cart:cart_remove" product.id %}">Remove</a>
+                            </td>
+                            <td>{{ item.price }}</td>
+                        </tr>
+                        </div>  
+                    {% endwith %}
+                {% endfor %}
+                <tr>
+                    <td><b>Razem:</b></td>
+                    <td colspan="4"></td>
+                    <td colspan="num"><b>{{ cart.get_total_price }} PLN</b></td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="text-right">
+                <a href="{% url "store:all_products" %}" class="btn btn-default" style="color:white;">Kontynuuj zakupy.</a>
+            </p>
+        
+            <button><a href="{% url 'orders:order_create' %}">Zamów</a></button>
+        </div>
+        </div>
+    </div> 
+{% endblock %}

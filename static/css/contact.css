@@ -1,0 +1,20 @@
+#contact{
+    text-align: center;
+    color:white;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.row {
+    margin-top: 20%;
+}
+
+.row a{
+    text-align: center;
+    color: white;
+    font-size: 100px;
+}
+
+.row a:hover{
+    color: pink;
+}

@@ -1,0 +1,54 @@
+#blog {
+    margin-top: 5%;
+    margin-left: 10%;
+    text-align: left;
+}
+
+.postarea {    
+    padding: 10px;
+    
+}
+
+.postarea a{
+    color: white;
+    text-decoration: none;
+}
+
+.postarea a:hover{
+    color: pink;
+}
+
+p#text {
+    font-size: 23px;
+}
+
+/* Comments */
+#commentarea{
+    margin-top: 50px;
+    width: 500px;
+}
+
+.comment{
+    background-color: rgba(60, 61, 63, 0.6);
+    border-radius: 10px;
+}
+
+#addcommentarea {
+    margin-top: 30px;
+    width: 500px;
+}
+
+
+@media only screen and (max-width:375px){
+    #blog{
+        width: 70%;
+    }
+
+    #commentarea{
+        width: 50%;
+    }
+
+    #addcommentarea{
+        width: 100%;
+    }
+}

@@ -1,0 +1,23 @@
+{% load static %}
+<div id="sidenav" class="sidenavigation">
+    
+    <div id="logo_btn">
+        <img src="{% static 'img/logo2.png' %}" alt="">
+    </div>
+    
+    <div id="menu">
+        <a href="{% url 'pages:about' %}">About</a>
+        <a href="{% url 'blog:all_posts' %}">Blog</a>
+        <a href="#" id="sklep" >Store</a>
+            <div id="storeMenu">
+                <a href="{% url 'store:category_detail' category_slug="koszulki" %}">Koszulki</a>
+                <a href="{% url 'store:category_detail' category_slug="bluzy" %}">Bluzy</a>
+                <a href="{% url 'store:category_detail' category_slug="czapki" %}">Czapki</a>
+                <a href="{% url 'store:category_detail' category_slug="handmade" %}">Handmade</a>
+                <a href="{% url 'store:category_detail' category_slug="sztuka" %}"> Sztuka </a>
+ 		<a href="{% url 'store:all_products' %}">Wszystko</a>
+            </div>
+        <a href="{% url 'pages:art' %}">Art</a>
+        <a href="{% url 'pages:contact' %}">Contact</a>
+    </div>
+</div>

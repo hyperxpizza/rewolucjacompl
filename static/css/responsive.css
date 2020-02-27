@@ -1,0 +1,102 @@
+/*
+Add: 
+-Blog for smartphones
+-Cart for smartphones and tablets
+*/
+
+/* small devices, phones etc. */
+@media only screen and (max-width: 812px){
+    
+    .container-fluid{
+        text-align: center;
+    }
+    .sidenavigation{
+        text-align: center;
+        display: list-item;
+        width: 100%;
+        margin-bottom: 50px;
+        font-size: 30px;
+    }
+
+    #storeMenu{
+        font-size: 20px;
+    }
+
+    #content{
+        display: inline;
+    }
+
+    #menu{
+        display: none;
+    }
+
+    #productimage{
+        float: none;
+    }
+
+    #product{
+        overflow: none;
+    }
+
+    #productdata{
+        overflow: none;
+    }
+
+    #about{
+        font-size:20px;
+    }
+
+    /* Store */
+    #product_detail{
+        padding-top: 0px;
+    }
+
+    #productdata{
+        overflow: none;
+    } 
+
+    #productimage{
+        float: none;
+    }
+
+    #store {
+        display: inline;
+    }
+
+    /* Contact */
+    #contact_row {
+        display: inline-flex;
+        margin-top: 10%;
+    }
+    
+}
+
+/* tablets */
+@media only screen and (min-width:600px){
+    #productimage {
+        float: none;
+        margin-left: 12%;
+    }
+}
+
+/* medium devices */
+@media only screen and (min-width:768px){
+
+}
+
+/* large devices */
+@media only screen and (min-width:992px){
+
+}
+
+/* xl devices */
+@media only screen and (min-width:1200px){
+
+}
+
+
+@media only screen and (max-width:375px){
+    #store{
+        display: inline;
+    }
+}

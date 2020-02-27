@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block customCss %}
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="blog">
+        
+        <div id="post_area">
+            <h2>{{ post.title }}</h2>
+            
+            <p class="class">
+                Tagi: {{post.tags.all|join:", "}}
+            </p>
+
+            <i class="date">
+                Opublikowany: {{post.publish}}
+            </i>
+            
+            <p id="text">
+                {{post.text|striptags}}
+            </p>
+            
+        </div>
+
+        <div id="commentarea">
+            {% with comments.count as total_comments %}
+                <h2>
+                    {% if total_comments == 1 %}
+                        {{ total_comments }} komentarz
+                    {% elif total_comments == 0 %}
+                        Brak komantarzy
+                    {% elif total_comments >= 5 %}
+                        {{ total_comments }} komentarzy
+                    {% else %}
+                        {{ total_comments }} komantarze
+                    {% endif %}
+                </h2>
+            {% endwith %}
+            
+            {% for comment in comments %}
+                <div class="comment">
+                    <p class="info">
+                        <b>{{ comment.name }}</b> {{ comment.created }}
+                    </p>
+                        {{ comment.body|linebreaks }}
+                </div>
+                    {% empty %}
+                    <p>
+                        Nie ma jeszcze żadnych komentarzy.
+                    </p>
+                
+            {% endfor %}
+        </div>
+            
+            <div id="addcommentarea">
+                <h2>Dodaj nowy komentarz:</h2>
+                <form action="" method="post">
+                    {{ comment_form|crispy }}
+                    {% csrf_token %}
+                    <p>
+                        <input type="submit" value="Dodaj komentarz">
+                    </p>
+                </form>
+            </div>
+    </div>
+{% endblock %}

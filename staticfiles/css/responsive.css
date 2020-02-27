@@ -1,0 +1,65 @@
+/*
+Add: 
+-Blog for smartphones
+-Cart for smartphones and tablets
+*/
+
+/* small devices, phones etc. */
+@media only screen and (max-width: 812px){
+    
+    .container-fluid{
+        text-align: center;
+    }
+    .sidenavigation{
+        text-align: center;
+        display: list-item;
+        width: 100%;
+        margin-bottom: 50px;
+    }
+
+    #content{
+        display: inline;
+    }
+
+    #menu{
+        display: none;
+    }
+
+    #productimage{
+        float: none;
+    }
+
+    #product{
+        overflow: none;
+    }
+
+    #productdata{
+        overflow: none;
+    }
+
+    #about{
+        font-size:20px;
+    }
+    
+}
+
+/* tablets */
+@media only screen and (min-width:600px){
+
+}
+
+/* medium devices */
+@media only screen and (min-width:768px){
+
+}
+
+/* large devices */
+@media only screen and (min-width:992px){
+
+}
+
+/* xl devices */
+@media only screen and (min-width:1200px){
+
+}
+
