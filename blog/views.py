@@ -8,14 +8,8 @@ from taggit.models import Tag
 def all_posts(request, tag_slug=None):
     posts = Post.objects.all().order_by("-created_at")
 
-    tag = None
-    if tag_slug:
-        tag = get_object_or_404(Tag, slug=tag_slug)
-        posts = object_list.filter(tags__in=[tag])
-
     context = {
         'posts': posts,
-        'tag': tag,
     }
 
     return render(request, 'blog/all_posts.html', context)
@@ -43,3 +37,14 @@ def post_detail(request,id):
     }
     
     return render(request, 'blog/post_detail.html', context)
+
+def search_by_tag(request, slug):
+    tag = Tag.objects.filter(slug=slug).values_list('name', flat=True)
+    posts = Post.objects.filter(tags__name__in=tag)
+
+    context = {
+        'tag': tag,
+        'posts': posts
+    }
+
+    return render(request, 'blog/all_posts_tagged.html', context)
