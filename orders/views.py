@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .models import OrderItem
 from .forms import OrderForm
 from cart.cart import Cart
-from django.core.mail import send_mail
 from django.conf import settings
 from django.core.mail import send_mail
 
@@ -30,13 +29,12 @@ def order_create(request):
 def send_email(order):
     subject = "Dziękujemy za zakupy na rewolucja.com.pl!"
     message = "Numer twojego zamówienia to: " + str(order.id) 
-    send_mail(
-        subject,
-        message,
-        'studio.rewolucja@gmail.com',
-        [order.email]
-    )
+    email_from = settings.EMAIL_HOST_USER
+    send_mail(subject, message, email_from, [order.email])
 
 def send_email_to_crew(order):
-    subject = "Nowe Zamówienie od: {} {} {}".format(order.first_name, order.last_name)
-    message = ""
+    subject = "Nowe Zamówienie, id: {}".format( order.id)
+    message = "Zamówienie: www.rewolucja.com.pl/admin/orders/order/{}/change".format(order.id)
+    email_from = settings.EMAIL_HOST_USER
+
+    send_mail(subject, message, email_from, ["studio.rewo@gmail.com"])
