@@ -19,7 +19,8 @@ def order_create(request):
             for item in cart:
                 OrderItem.objects.create(order=order,product=item['product'],price=item['price'],quantity=item['quantity'])
             cart.clear()
-            #Osend_email(order)
+            send_email(order)
+            send_email_to_crew(order)
 
             return render(request,'orders/order/created.html', {'order':order})
     else:
@@ -36,3 +37,6 @@ def send_email(order):
         [order.email]
     )
 
+def send_email_to_crew(order):
+    subject = "Nowe Zamówienie od: {} {} {}".format(order.first_name, order.last_name)
+    message = ""
