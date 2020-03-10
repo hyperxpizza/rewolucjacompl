@@ -25,9 +25,9 @@ SECRET_KEY = 'x_!)65tucrtfc4e@*nsp8hfm67gn)$gs9hp1n0m7jr^_4wta%4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = FALSE
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["46.41.135.147", "rewolucja.com.pl"]
 
 # Application definition
 
@@ -83,23 +83,23 @@ WSGI_APPLICATION = 'rewolucja.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 #
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'rewolucja',
-#        'USER': 'rewolucja',
-#        'PASSWORD': 'Wojtekfoka1',
-#        'HOST': 'localhost',
-#        'PORT': '',   
-#    }
-#}
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'rewolucja',
+        'USER': 'rewolucja',
+       'PASSWORD': 'Wojtekfoka1',
+        'HOST': 'localhost',
+        'PORT': '',   
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
 
 
 # Password validation
