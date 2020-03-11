@@ -41,9 +41,9 @@ def contact_mail(request):
             
             return redirect('pages:contact_success')
     
-    context = {
-       'form': form
-    }
+        context = {
+            'form': form
+        }
 
     return render(request, 'pages/contact_mail.html', context)    
 
