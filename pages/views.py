@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import ArtImage, IndexSliderImage
 from .forms import ContactForm
 from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
 
 def contact(request):
     context = {}
@@ -29,22 +30,19 @@ def contact_mail(request):
         
         if form.is_valid():
             subject = form.cleaned_data['subject']
-            from_email = form.cleaned_data['from_email']
-            message = form.cleaned_data['message']
+            email = form.cleaned_data['from_email']
+            rec_list = [email, settings.EMAIL_HOST_USER]
+	    message = form.cleaned_data['message']
 
             subject2 = "Kontakt - Studio Rewolucja"
             message2 = "Dziękujemy za wiadomość! Postaramy się odpowiedzieć na twojego maila w jak najkrótszym czasie. TEAM REWOLUCJA."
 
-            try:
-                send_mail(subject,message, from_email, ["studio.rewolucja@gmail.com"])
-                send_mail(subject2, message2, "studio.rewolucja@gmail.com", [from_email])
-            except BadHeaderError:
-                return HttpResponse('Invalid header')
+            send_mail(subject, message, settings.EMAIL_HOST_USER, rec_list)
             
             return redirect('pages:contact_success')
     
     context = {
-        'form': form
+       'form': form
     }
 
     return render(request, 'pages/contact_mail.html', context)    
