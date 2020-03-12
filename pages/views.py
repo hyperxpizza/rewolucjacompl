@@ -32,8 +32,7 @@ def contact_mail(request):
             subject = form.cleaned_data['subject']
             email = form.cleaned_data['from_email']
             rec_list = [email, settings.EMAIL_HOST_USER]
-	    message = form.cleaned_data['message']
-
+	        
             subject2 = "Kontakt - Studio Rewolucja"
             message2 = "Dziękujemy za wiadomość! Postaramy się odpowiedzieć na twojego maila w jak najkrótszym czasie. TEAM REWOLUCJA."
 
