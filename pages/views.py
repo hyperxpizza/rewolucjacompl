@@ -30,21 +30,26 @@ def contact_mail(request):
         
         if form.is_valid():
             subject = form.cleaned_data['subject']
-            email = form.cleaned_data['from_email']
-            rec_list = [email, settings.EMAIL_HOST_USER]
-	        
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+
             subject2 = "Kontakt - Studio Rewolucja"
             message2 = "Dziękujemy za wiadomość! Postaramy się odpowiedzieć na twojego maila w jak najkrótszym czasie. TEAM REWOLUCJA."
 
-            send_mail(subject, message, settings.EMAIL_HOST_USER, rec_list)
+            try:
+                send_mail(subject,message, from_email, ["studio.rewo@gmail.com"])
+                send_mail(subject2, message2, "studio.rewo@gmail.com", [from_email])
+            except BadHeaderError:
+                return HttpResponse('Invalid header')
             
             return redirect('pages:contact_success')
     
-        context = {
-            'form': form
-        }
+    context = {
+        'form': form
+    }
 
     return render(request, 'pages/contact_mail.html', context)    
+
 
 
 def contact_success(request):

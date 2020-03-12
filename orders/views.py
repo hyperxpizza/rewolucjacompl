@@ -28,13 +28,13 @@ def order_create(request):
 
 def send_email(order):
     subject = "Dziękujemy za zakupy na rewolucja.com.pl!"
-    message = "Numer twojego zamówienia to: " + str(order.id) 
-    email_from = settings.EMAIL_HOST_USER
+    message = "Numer twojego zamówienia to: {} ".format(order.id) 
+    email_from = "studio.rewo@gmail.com"
     send_mail(subject, message, email_from, [order.email])
 
 def send_email_to_crew(order):
-    subject = "Nowe Zamówienie, id: {}".format( order.id)
+    subject = "Nowe Zamówienie, id: {}".format(order.id)
     message = "Zamówienie: www.rewolucja.com.pl/admin/orders/order/{}/change".format(order.id)
-    email_from = settings.EMAIL_HOST_USER
+    email_from = "studio.rewo@gmail.com"
 
-    send_mail(subject, message, email_from, ["studio.rewo@gmail.com"])
+    send_mail(subject, message, email_from, ["studio.rewo@gmail.com"]) 
