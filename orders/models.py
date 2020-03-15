@@ -12,6 +12,7 @@ class Order(models.Model):
     adress = models.CharField(max_length=100,blank=True, null=True)
     postal_code = models.CharField(max_length=30,blank=True, null=True)
     city = models.CharField(max_length=50,blank=True, null=True)
+    comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     sent = models.BooleanField(default=False)

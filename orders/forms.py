@@ -13,7 +13,8 @@ class OrderForm(forms.ModelForm):
         self.fields['adress'].required = True
         self.fields['postal_code'].required = True
         self.fields['city'].required = True
+        self.fields['comment'].required = False
     
     class Meta:
         model = Order
-        fields = ['first_name', 'last_name', 'email', 'phone', 'adress', 'postal_code', 'city',]
+        fields = ['first_name', 'last_name', 'email', 'phone', 'adress', 'postal_code', 'city', 'comment']
