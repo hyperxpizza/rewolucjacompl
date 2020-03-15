@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = 'x_!)65tucrtfc4e@*nsp8hfm67gn)$gs9hp1n0m7jr^_4wta%4'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = FALSE
@@ -155,9 +155,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 #email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'rewolucja'
-EMAIL_HOST_PASSWORD = 'rewolucja123'
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'studio.rewo@gmail.com'
