@@ -13,7 +13,7 @@ django-taggit==1.2.0
 gunicorn==20.0.4
 idna==2.9
 packaging==20.1
-Pillow==7.0.0
+Pillow==7.1.0
 pip-review==1.0
 psycopg2==2.8.4
 pycparser==2.19
