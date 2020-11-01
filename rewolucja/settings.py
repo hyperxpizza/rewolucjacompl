@@ -27,7 +27,7 @@ SECRET_KEY = ''
 #DEBUG = FALSE
 DEBUG = False
 
-ALLOWED_HOSTS = ["46.41.135.147", "rewolucja.com.pl"]
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'rewolucja',
         'USER': 'rewolucja',
-       'PASSWORD': '',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',   
     }
