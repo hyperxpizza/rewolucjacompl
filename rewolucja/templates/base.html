@@ -9,11 +9,14 @@
     {% include 'components/_jsfiles.html' %}
     {% include 'components/_seo.html' %}
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+    <div class="wrapper flex-grow-1">
+    
     {% include 'components/_navigation.html' %}
-    <div class="container">
-        {% block content %}
-        {% endblock %}
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
     {% include 'components/_footer.html' %}
     <!-- jQuery and JS bundle w/ Popper.js -->
