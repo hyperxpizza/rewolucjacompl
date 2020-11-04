@@ -41,3 +41,15 @@ def view_by_tag(request, slug):
     }
 
     return render(request, 'publishing/view_by_tag.html', context)
+
+def art(request):
+    context = {}
+    return render(request, 'website/art.html', context)
+
+def store(request):
+    context = {}
+    return render(request, 'website/store.html', context)
+
+def product_detail(request, slug):
+    context = {}
+    return render(request, 'website/product_detail', context)
