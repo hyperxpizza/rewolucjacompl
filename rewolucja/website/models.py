@@ -120,3 +120,7 @@ class ProductOptions(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.DO_NOTHING)
     image = models.ImageField()
+
+    class Meta:
+        verbose_name = "Zdjęcie produktu"
+        verbose_name_plural = "Zdjęcia produktów"
