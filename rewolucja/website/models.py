@@ -95,17 +95,17 @@ class Product(models.Model):
         return reverse('website:product_detail', args=[self.slug])
 
 class ProductOptions(models.Model):
-   SIZE_OPTIONS = (
+    SIZE_OPTIONS = [
         ("S", "S"),
         ("M", "M"),
         ("L", "L"),
         ("XL", "XL"),
         ("XXL", "XXL"),
         ("NO SIZE", "Brak rozmiaru"),
-        ("universal", "Uniwersalny")
-    )
+        ("universal", "Uniwersalny"),
+    ]
 
-    product_size = models.CharField(max_length=30, choices=SIZE_OPTIONS, verbose_name="Rozmiar produktu")
+    product_size = models.CharField(max_length=100, choices=SIZE_OPTIONS, verbose_name="Rozmiar produktu")
     stock = models.PositiveIntegerField()
     sold_out = models.BooleanField(default=False)
 
