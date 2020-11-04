@@ -80,7 +80,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Data aktualizacji")
 
     class Meta:
-        ordering = ('created_at')
+        ordering = ('created_at',)
         verbose_name="Produkt"
         verbose_name_plural="Produkty"
 
