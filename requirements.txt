@@ -8,5 +8,8 @@ easy-thumbnails==2.7
 Pillow==8.0.1
 pkg-resources==0.0.0
 python-dotenv==0.15.0
+python-http-client==3.3.1
 pytz==2020.4
+sendgrid==6.4.7
 sqlparse==0.4.1
+starkbank-ecdsa==1.1.0
