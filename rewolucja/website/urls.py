@@ -8,14 +8,15 @@ urlpatterns = [
     #index
     path('', views.index, name='index'),
     #post_detail
-    path('/blog/<slug:slug>/', views.post_detail, name="post_detail"),
+    path('blog/<slug:slug>/', views.post_detail, name="post_detail"),
     #store
-    path('/sklep', views.store, name="store"),
+    path('sklep/', views.store, name="store"),
     #product detail
-    path('/sklep/<slug:slug>/', views.product_detail, name="product_detail"),
+    path('sklep/<slug:slug>/', views.product_detail, name="product_detail"),
     #art
-    path('/sztuka', views.art, name="art"),
+    path('sztuka/', views.art, name="art"),
     #search by tag
-    path('tag/<slug:slug>', views.view_by_tag, name="view_by_tag")
+    path('tag/<slug:slug>', views.view_by_tag, name="view_by_tag"),
+    path('o-nas/', views.about, name="about")
 
 ]
