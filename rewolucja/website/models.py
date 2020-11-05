@@ -1,9 +1,14 @@
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 from django.urls import reverse
 from django.utils.text import slugify
 from taggit.managers import TaggableManager
 from image_cropping import ImageRatioField
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
+from .forms import NewSubscriberForm
 
 # Blog models
 class Post(models.Model):
@@ -84,6 +89,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Cena")
     available = models.BooleanField(default=True, verbose_name="Dostępność")
     stock = models.PositiveIntegerField(verbose_name="Ilość")
+    slug = models.SlugField(max_length=250, unique=True, null=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Data aktualizacji")
 
@@ -113,6 +119,7 @@ class ProductOptions(models.Model):
         ("universal", "Uniwersalny"),
     ]
 
+    product = models.ForeignKey(Product, related_name="options", on_delete=models.CASCADE, verbose_name="Produkt")
     product_size = models.CharField(max_length=100, choices=SIZE_OPTIONS, verbose_name="Rozmiar produktu")
     stock = models.PositiveIntegerField()
     sold_out = models.BooleanField(default=False)
@@ -126,26 +133,49 @@ class ProductOptions(models.Model):
             self.sold_out = True
             
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, related_name='images', on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField()
 
     class Meta:
         verbose_name = "Zdjęcie produktu"
         verbose_name_plural = "Zdjęcia produktów"
 
-# Newsletter
+# Newsletter models
 class Subscriber(models.Model):
     email = models.EmailField(unique=True, null=False)
     conf_num = models.CharField(max_length=15)
     confirmed = models.BooleanField(default=True)
 
     class Meta:
-        verbose_name = "Subskrybent Newsletteru"
-        verbose_name_plural = "Subskrybenci Newsletteru"
+        verbose_name = "Subskrybent"
+        verbose_name_plural = "Subskrybenci"
 
     def __str__(self):
         return self.email
 
     def send_welcome_email(self):
+        if self.confirmed == False:
+            message = Mail(from_email=settings.FROM_EMAIL_NEWSLETTER, to_emails=self.email, subject="Witaj w newsletterze...", html_content="")
+
+            sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+            response = sg.send(message)
+            print(response)
+            self.confirmed = True
+
+class Newsletter(models.Model):
+    title = models.TextField(blank=True, null=False, verbose_name="Tytuł")
+    content = models.FileField(upload_to='uploads/newsletters', verbose_name="Zawartość (Plik HTML)")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Data aktualizacji")
+
+    class Meta:
+        ordering = ('created_at', 'title')
+        verbose_name = "Newsletter"
+        verbose_name_plural = "Newslettery"
+
+    def __str__(self):
+        return self.title + " " + self.created_at.strftime("%B %d, %Y")
+
+    def send(self, request):
         pass
 

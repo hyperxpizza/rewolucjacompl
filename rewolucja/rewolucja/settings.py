@@ -175,3 +175,7 @@ THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
 
+#Newsletetr/Sendgrid
+FROM_EMAIL = 'newsletter@rewolucja.com.pl'
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+
