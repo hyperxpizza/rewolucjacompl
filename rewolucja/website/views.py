@@ -1,8 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.decorators.csrf import csrf_exempt
 from taggit.models import Tag
-from .models import Post
+import random
 
+from .models import Post, Subscriber
+
+#helpers
+def random_digits():
+    return "%0.12d" % random.randint(0, 999999999999)
 
 def index(request):
     context = {}
@@ -53,3 +59,18 @@ def store(request):
 def product_detail(request, slug):
     context = {}
     return render(request, 'website/product_detail', context)
+
+def about(request):
+    context = {}
+    return render(request, 'website/about.html', context)
+
+@csrf_exempt
+def newsletter_signup(request):
+    if request.method == "POST":
+        new_subscriber = Subscriber(email=request.POST["email"], conf_num=random_digits())
+        new_subscriber.save()
+        new_subscriber.send_welcome_email()
+
+@csrf_exempt
+def unsubscribe_newsletter(request, conf_num):
+    pass

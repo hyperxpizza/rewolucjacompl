@@ -17,6 +17,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to ='uploads/articles/thumbnails', null=False, verbose_name="Zdjęcie")
     #post_thumbnail = ImageRatioField('thumbnail', '1120x400', size_warning=True, verbose_name="Miniaturka 1120x400")
     tags = TaggableManager(verbose_name="tagi")
+    status = models.CharField(max_length=100, choices=STATUS_CHOICE, verbose_name="Status publikacji", default="draft")
     slug = models.SlugField(max_length=250, unique=True, null=False)
     hits = models.IntegerField(default=0, editable=False, verbose_name="Wyświetlenia")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
@@ -32,6 +33,13 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('website:post', args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        if self.status == 'published':
+            self.send_newsletter()
+
+    def send_newsletter(self):
+        pass
 
 #art model
 class ArtItem(models.Model):
@@ -124,3 +132,20 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = "Zdjęcie produktu"
         verbose_name_plural = "Zdjęcia produktów"
+
+# Newsletter
+class Subscriber(models.Model):
+    email = models.EmailField(unique=True, null=False)
+    conf_num = models.CharField(max_length=15)
+    confirmed = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "Subskrybent Newsletteru"
+        verbose_name_plural = "Subskrybenci Newsletteru"
+
+    def __str__(self):
+        return self.email
+
+    def send_welcome_email(self):
+        pass
+
