@@ -10,7 +10,6 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django_countries.fields import CountryField
 
-from .forms import NewSubscriberForm
 
 # Blog models
 class Post(models.Model):
