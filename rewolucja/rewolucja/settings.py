@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'easy_thumbnails',
     'image_cropping',
+    'django_countries',
     'taggit',
     'website'
 ]
