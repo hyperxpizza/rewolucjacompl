@@ -4,5 +4,17 @@
     <link rel="stylesheet" href="{% static 'css/art_styles.css' %}">
 {% endblock %}
 {% block content %}
+    <div id="waterfall-container">
+        {% for item in art_items %}
+        {% endfor %}
+    </div>
 
+{% endblock %}
+{% block bottom_body_js_block %}
+    <script src="{% static 'js/minified/bootstrap-waterfall.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#waterfall-container').waterfall();
+        });
+    </script>
 {% endblock %}

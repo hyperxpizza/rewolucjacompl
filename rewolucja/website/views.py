@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from taggit.models import Tag
 import random
 
-from .models import Post, Subscriber
+from .models import Post, Subscriber, ArtItem
 
 #helpers
 def random_digits():
@@ -49,7 +49,10 @@ def view_by_tag(request, slug):
     return render(request, 'publishing/view_by_tag.html', context)
 
 def art(request):
-    context = {}
+    art_items = ArtItem.objects.filter(visible=True)
+    context = {
+        'art_items': art_items
+    }
     return render(request, 'website/art.html', context)
 
 def store(request):
