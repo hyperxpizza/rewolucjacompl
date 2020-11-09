@@ -76,4 +76,7 @@ def newsletter_signup(request):
 
 @csrf_exempt
 def unsubscribe_newsletter(request, conf_num):
-    pass
+    #find subscriber with given conf num
+    subscriber = get_object_or_404(Subscriber, conf_num)
+    subscriber.confirmed = False
+    return render(request, 'website/unsubscribe.html')
