@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+     'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django_summernote',
     'easy_thumbnails',
     'image_cropping',
@@ -144,6 +146,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#Cart session
+CART_SESSION_ID = 'cart'
 
 #Summernote
 X_FRAME_OPTIONS = 'SAMEORIGIN'

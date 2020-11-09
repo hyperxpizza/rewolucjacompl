@@ -4,7 +4,13 @@ from django.conf.urls import url
 from django.contrib.sitemaps.views import sitemap
 from django.views.generic.base import TemplateView
 
-sitemaps = {}
+from website.sitemaps import Static_Sitemap, Post_Sitemap, Product_sitemap
+
+sitemaps = {
+    'static': Static_Sitemap(),
+    'post': Post_Sitemap(),
+    'product': Product_Sitemap(),
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),

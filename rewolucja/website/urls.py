@@ -17,6 +17,9 @@ urlpatterns = [
     path('sztuka/', views.art, name="art"),
     #search by tag
     path('tag/<slug:slug>', views.view_by_tag, name="view_by_tag"),
-    path('o-nas/', views.about, name="about")
+    path('o-nas/', views.about, name="about"),
+    #newsletter
+    path('newsletter/', views.newsletter_signup, name='newsletter'),
+    path("newsletter/unsubscribe/<int:conf_num>/", views.unsubscribe_newsletter, name='unsubscribe_newsletter')
 
 ]
