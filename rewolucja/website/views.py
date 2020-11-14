@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import EmailMessage
 from taggit.models import Tag
+from .cart import Cart
 import random
 
 from .models import Post, Subscriber, ArtItem
@@ -11,6 +13,17 @@ def random_digits():
     return "%0.12d" % random.randint(0, 999999999999)
 
 def index(request):
+    post_list = Post.objects.filter(status="published")
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(post_list, 3)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
     context = {}
     return render(request, 'website/index.html', context)
 
@@ -58,6 +71,15 @@ def art(request):
 def store(request):
     context = {}
     return render(request, 'website/store.html', context)
+
+def order_create(request):
+    pass
+
+def send_order_confirmation(order):
+    pass
+
+def send_order_notification(order):
+    pass
 
 def product_detail(request, slug):
     context = {}
