@@ -13,7 +13,17 @@ def random_digits():
     return "%0.12d" % random.randint(0, 999999999999)
 
 def index(request):
-    posts = Post.objects.filter(status="published")
+    post_list = Post.objects.filter(status="published")
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(post_list, 3)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
     context = {}
     return render(request, 'website/index.html', context)
 
