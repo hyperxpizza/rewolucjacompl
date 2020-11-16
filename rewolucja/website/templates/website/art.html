@@ -12,7 +12,9 @@
             <div class="masonry">
                 {% for item in art_items %}
                 <div class="masonry-item">
-                    <img src="{{item.image.url}}" alt="" class="masonry-content img-fluid" width="100%">
+                    <a href="{{item.image.url}}" class="example-image-link" data-lightbox="example-1">
+                        <img src="{{item.image.url}}" alt="" class="masonry-content" width="100%">
+                    </a>
                 </div>
                 {% endfor %}
             </div>
@@ -20,6 +22,19 @@
     </div>
 {% endblock %}
 {% block bottom_body_js_block %}
+    <!--Masonry-->
     <script src="{% static 'js/minified/masonry.pkgd.min.js' %}"></script>
     <script src="{% static 'js/minified/gallery.min.js' %}"></script>
+    <!--Lightbox-->
+    <script src="{% static 'js/minified/lightbox.min.js' %}"></script>
+    <script>
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'fitImagesInViewport': true,
+            'disableScrolling': true,
+            'alwaysShowNavOnTouchDevices': true,
+            'albumLabel': "Zdjęcie %1 z %2"
+        })
+    </script>
 {% endblock %}
