@@ -8,23 +8,18 @@
 {% endblock %}
 {% block content %}
     <div class="container-fluid">
-        <div id="waterfall-container">
-            {% for item in art_items %}
-                <div class="pin list-group">
-                    <li class="list-group-item">
-                        <img src="{{item.image.url}}" alt="">
-                    </li>
+        <div class="masonry-wrapper">
+            <div class="masonry">
+                {% for item in art_items %}
+                <div class="masonry-item">
+                    <img src="{{item.image.url}}" alt="" class="masonry-content" width="100%">
                 </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+        </div
     </div>
 {% endblock %}
 {% block bottom_body_js_block %}
-    <script src="{% static 'js/minified/bootstrap-waterfall.min.js' %}"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('#waterfall-container').waterfall();
-        });
-    </script>
+    <script src="{% static 'js/minified/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/minified/gallery.min.js' %}"></script>
 {% endblock %}

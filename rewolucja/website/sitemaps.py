@@ -10,7 +10,7 @@ class Static_Sitemap(Sitemap):
         return [
             'website:index',
             'website:art',
-            'webiste.about'
+            'webiste:about',
             'website:store'
         ]
 
