@@ -1,20 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Sztuka | REWOLUCJA{% endblock %}
 {% block css_files %}
     <link rel="stylesheet" href="{% static 'css/art_styles.css' %}">
+    <!--Lightbox css-->
+    <link rel="stylesheet" href="{% static 'css/minified/lightbox.min.css' %}">
 {% endblock %}
 {% block content %}
-    <div id="waterfall-container">
-        {% for item in art_items %}
-        {% endfor %}
+    <div class="container-fluid">
+        <div class="masonry-wrapper">
+            <div class="masonry">
+                {% for item in art_items %}
+                <div class="masonry-item">
+                    <img src="{{item.image.url}}" alt="" class="masonry-content" width="100%">
+                </div>
+                {% endfor %}
+            </div>
+        </div
     </div>
-
 {% endblock %}
 {% block bottom_body_js_block %}
-    <script src="{% static 'js/minified/bootstrap-waterfall.min.js' %}"></script>
-    <script>
-        $(document).ready(function () {
-            $('#waterfall-container').waterfall();
-        });
-    </script>
+    <script src="{% static 'js/minified/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/minified/gallery.min.js' %}"></script>
 {% endblock %}

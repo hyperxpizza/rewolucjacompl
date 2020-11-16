@@ -13,7 +13,11 @@ def random_digits():
     return "%0.12d" % random.randint(0, 999999999999)
 
 def index(request):
-    post_list = Post.objects.filter(status="published")
+    all_posts = Post.objects.filter(status="published").order_by('-created_at')
+
+    #main_post = all_posts[0]
+    #featured_posts = all_posts[0:4]
+    post_list = all_posts
 
     page = request.GET.get('page', 1)
     paginator = Paginator(post_list, 3)
@@ -62,7 +66,7 @@ def view_by_tag(request, slug):
     return render(request, 'publishing/view_by_tag.html', context)
 
 def art(request):
-    art_items = ArtItem.objects.filter(visible=True)
+    art_items = ArtItem.objects.filter(visible=True).order_by('created_at')
     context = {
         'art_items': art_items
     }
