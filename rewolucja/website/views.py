@@ -93,6 +93,9 @@ def about(request):
     context = {}
     return render(request, 'website/about.html', context)
 
+def search(request):
+    pass
+
 @csrf_exempt
 def newsletter_signup(request):
     if request.method == "POST":
