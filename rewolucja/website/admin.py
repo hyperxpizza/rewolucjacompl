@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Post, Subscriber, Newsletter, ProductOptions, ProductImage, Product, Order, OrderItem
+from .models import Post, Subscriber, Newsletter, ProductOptions, ProductImage, Product, Order, OrderItem, ArtItem
 
 def send_newsletter(modeladmin, request, queryset):
     for newsletter in queryset:
@@ -36,9 +36,12 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ['paid','created_at','updated_at', 'sent']
     inlines = [OrderItemInline]
 
+class ArtItemAdmin(admin.ModelAdmin):
+    pass
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Subscriber)
 admin.site.register(Newsletter, NewsletterAdmin)
 admin.site.register(Order, OrderAdmin)
+admin.site.register(ArtItem, ArtItemAdmin)

@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Sztuka | REWOLUCJA{% endblock %}
 {% block css_files %}
     <link rel="stylesheet" href="{% static 'css/art_styles.css' %}">
+    <!--Lightbox css-->
+    <link rel="stylesheet" href="{% static 'css/minified/lightbox.min.css' %}">
 {% endblock %}
 {% block content %}
-    <div id="waterfall-container">
-        {% for item in art_items %}
-        {% endfor %}
+    <div class="container-fluid">
+        <div id="waterfall-container">
+            {% for item in art_items %}
+                <div class="pin list-group">
+                    <li class="list-group-item">
+                        <img src="{{item.image.url}}" alt="">
+                    </li>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-
 {% endblock %}
 {% block bottom_body_js_block %}
     <script src="{% static 'js/minified/bootstrap-waterfall.min.js' %}"></script>
+
     <script>
         $(document).ready(function () {
             $('#waterfall-container').waterfall();

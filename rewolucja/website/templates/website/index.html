@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="{% static 'css/index_styles.css' %}">
 {% endblock %}
 {% block content %}
+    <!--Main post -->
+
+    <!--Featured posts-->
     <div class="container-fluid" style="margin-top: 100px; background-color: aquamarine;">
         <div class="infinite-container">
         {% for post in posts %}
@@ -19,7 +22,7 @@
 {% endblock %}
 {% block bottom_body_js_block%}
     <script src="{% static 'js/minified/jquery.waypoints.min.js' %}"></script>
-    <script src="{% static 'js/minified/inifinite.min.js' %}"></script>
+    <script src="{% static 'js/minified/infinite.min.js' %}"></script>
     <script>
         var infinite = new Waypoint.Infinite({
           element: $('.infinite-container')[0],
