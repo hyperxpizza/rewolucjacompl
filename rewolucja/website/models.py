@@ -21,7 +21,7 @@ class Post(models.Model):
     subtitle = models.TextField(null=True, blank=True, verbose_name="Podtytuł(Opcjonalnie)")
     text = models.TextField(verbose_name="Treść Posta")
     image = models.ImageField(upload_to ='uploads/articles/thumbnails', null=False, verbose_name="Zdjęcie")
-    post_thumbnail = ImageRatioField('thumbnail', '800x300', size_warning=True, verbose_name="Miniaturka 800x300")
+    post_thumbnail = ImageRatioField('image', '800x300', size_warning=True, verbose_name="Miniaturka 800x300")
     tags = TaggableManager(verbose_name="tagi")
     status = models.CharField(max_length=100, choices=STATUS_CHOICE, verbose_name="Status publikacji", default="draft")
     slug = models.SlugField(max_length=250, unique=True, null=False)
@@ -40,9 +40,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('website:post', args=[self.slug])
 
-    def save(self, *args, **kwargs):
-        if self.status == 'published':
-            self.send_newsletter()
+    #def save(self, *args, **kwargs):
+    #    if self.status == 'published':
+    #        self.send_newsletter()
 
     def send_newsletter(self):
         pass
