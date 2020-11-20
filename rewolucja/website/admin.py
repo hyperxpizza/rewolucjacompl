@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from .models import Post, Subscriber, Newsletter, ProductOptions, ProductImage, Product, Order, OrderItem, ArtItem
+from image_cropping import ImageCroppingMixin
 
 def send_newsletter(modeladmin, request, queryset):
     for newsletter in queryset:
@@ -8,7 +9,7 @@ def send_newsletter(modeladmin, request, queryset):
 
 send_newsletter.short_description = "Wyślij newsletter do subskrybentów"
 
-class PostAdmin(SummernoteModelAdmin, admin.ModelAdmin):
+class PostAdmin(SummernoteModelAdmin, ImageCroppingMixin, admin.ModelAdmin):
     summernote_fields = ('text',)
     prepopulated_fields = {'slug': ('title',)}
 
