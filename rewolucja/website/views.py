@@ -14,9 +14,10 @@ def random_digits():
 
 def index(request):
     all_posts = Post.objects.filter(status="published").order_by('-created_at')
-    main_post = None
+    main_post = all_posts[0]
+    featured_posts = all_posts [1:4]
 
-    post_list = all_posts
+    post_list = all_posts[4:0]
 
     page = request.GET.get('page', 1)
     paginator = Paginator(post_list, 3)
@@ -29,12 +30,14 @@ def index(request):
 
     context = {
         'posts': posts,
-        'main_post': main_post
+        'main_post': main_post,
+        'featured_posts': featured_posts,
+        'posts': posts
     }
     return render(request, 'website/index.html', context)
 
 def post_detail(request, slug):
-    post = get_object_or_404(Post, slug)
+    post = get_object_or_404(Post, slug=slug)
 
     #increment hits counter
     post.hits += 1
