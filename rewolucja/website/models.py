@@ -40,10 +40,6 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('website:post_detail', args=[self.slug])
 
-    #def save(self, *args, **kwargs):
-    #    if self.status == 'published':
-    #        self.send_newsletter()
-
     def send_newsletter(self):
         pass
 
@@ -185,7 +181,7 @@ class OrderItem(models.Model):
 class Subscriber(models.Model):
     email = models.EmailField(unique=True, null=False)
     conf_num = models.CharField(max_length=15)
-    confirmed = models.BooleanField(default=True)
+    confirmed = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Subskrybent"
@@ -196,7 +192,20 @@ class Subscriber(models.Model):
 
     def send_welcome_email(self):
         if self.confirmed == False:
-            message = Mail(from_email=settings.FROM_EMAIL_NEWSLETTER, to_emails=self.email, subject="Witaj w newsletterze...", html_content="")
+            message = Mail(from_email=settings.FROM_EMAIL_NEWSLETTER, to_emails=self.email, subject="Witaj w newsletterze rewolucja.pl", 
+            html_content="""
+                        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+                        <html xmlns="http://www.w3.org/1999/xhtml" lang="pl-PL">
+                        <head>
+                            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                            <title>Newsletter Rewolucja Studio</title>
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                        </head>
+                        <body>
+                            <h1>TEST</h1>
+                        </body
+                        </html>
+                        """)
 
             sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
             response = sg.send(message)

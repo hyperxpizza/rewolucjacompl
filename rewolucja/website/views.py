@@ -40,6 +40,7 @@ def post_detail(request, slug):
 
     #increment hits counter
     post.hits += 1
+    post.save()
 
     context = {
         'post': post
@@ -103,9 +104,14 @@ def search(request):
 @csrf_exempt
 def newsletter_signup(request):
     if request.method == "POST":
-        new_subscriber = Subscriber(email=request.POST["email"], conf_num=random_digits())
-        new_subscriber.save()
-        new_subscriber.send_welcome_email()
+        new_email = request.POST.get('email')
+        if Subscriber.objects.filter(email=new_email).exists():
+            return
+        else:
+            new_subscriber = Subscriber(email=new_email, conf_num=random_digits())
+            new_subscriber.save()
+            new_subscriber.send_welcome_email()
+        return render(request, 'website/newsletter.html')
 
 @csrf_exempt
 def unsubscribe_newsletter(request, conf_num):
