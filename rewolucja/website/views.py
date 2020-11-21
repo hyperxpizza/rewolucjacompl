@@ -17,10 +17,10 @@ def index(request):
     main_post = all_posts[0]
     featured_posts = all_posts [1:4]
 
-    post_list = all_posts[4:0]
+    post_list = all_posts
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(post_list, 3)
+    paginator = Paginator(post_list, 2)
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -29,7 +29,6 @@ def index(request):
         posts = paginator.page(paginator.num_pages)
 
     context = {
-        'posts': posts,
         'main_post': main_post,
         'featured_posts': featured_posts,
         'posts': posts

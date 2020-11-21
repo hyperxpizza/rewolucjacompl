@@ -2,7 +2,7 @@
 {% load static %}
 {% load thumbnail %}
 {% block css_files %}
-    <link rel="stylesheet" href="{% static 'css/index_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index_styles.css' %}?version=2">
 {% endblock %}
 {% block content %}
     
@@ -14,8 +14,8 @@
                         <img src="{% thumbnail main_post.image 900x450 box=main_post.post_thumbnail crop detail %}" alt="" class="img-fluid">
                     </div>
                     <div class="col-md-4">
-                        <h1>{{ main_post.title }}</h1>
-                        <h3>{{ main_post.subtitle }}</h3>
+                        <h1 class="post-title-1">{{ main_post.title }}</h1>
+                        <h3 class="post-subtitle">{{ main_post.subtitle }}</h3>
                     </div>
             </div>
         </a>
@@ -28,27 +28,34 @@
             <div class="col-md-4">
                 <a href="{{ post.get_absolute_url }}">
                     <img src="{% thumbnail post.image 900x450 box=post.post_thumbnail crop detail %}" alt="" class="img-fluid">
-                    <h1>{{post.title}}</h1>
+                    <h1 class="post-title-2">{{post.title}}</h1>
                 </a>
             </div>
             {% endfor %}
         </div>
     </div>
 
-    <div class="container-fluid" id="infinite-container">
+    <!-- Infinite container -->
+    <div class="container-fluid">
         <div class="infinite-container">
-        {% for post in posts %}
-            <!--TODO: post styling on homepage-->
-        {% endfor %}
+            {% for post in posts %}
+                <div class="infinite-item">
+                    <div class="row">
+                        <img src="{% thumbnail post.image 900x450 box=post.post_thumbnail crop detail %}" alt="" class="img-fluid">
+                    </div>
+                </div>
+            {% endfor %}
         </div>
+        
         {% if posts.has_next %}
-            <a class="infinite-more-link" href="?page={{ posts.next_page_number }}"></a>
+            <a class="infinite-more-link" href="?page={{ posts.next_page_number }}">More</a>
         {% endif %}
-        <div class="loading" style="display: none;">
-        </div>
     </div>
+
+
 {% endblock %}
 {% block bottom_body_js_block%}
+    <script src="{% static 'js/minified/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/minified/jquery.waypoints.min.js' %}"></script>
     <script src="{% static 'js/minified/infinite.min.js' %}"></script>
     <script>
