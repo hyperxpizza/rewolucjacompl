@@ -18,6 +18,9 @@
 }
 
 /* Post content */
+#post-content {
+    padding-top: 30px;
+}
 #post-content p{
     font-size: 20px;
 }

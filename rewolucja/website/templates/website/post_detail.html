@@ -3,7 +3,7 @@
 {% load thumbnail %}
 {% block title %} {{post.title}} | Rewolucja {% endblock %}
 {% block css_files %}
-    <link rel="stylesheet" href="{% static 'css/post_detail_styles.css' %}?version=2">
+    <link rel="stylesheet" href="{% static 'css/post_detail_styles.css' %}?version=3">
 {% endblock %}
 {% block meta %}
     <!--Meta description-->
@@ -13,14 +13,14 @@
     <meta property="og:url" content="https://rewolucja.pl{{article.get_absolute_url}}" />
     <meta property="og:title" content="{{post.title}}" />
     <meta property="og:description" content="{{post.subtitle}}" />
-    <meta property="og:image" content="https://rewolucja.pl{{post.thumbnail.url}}" />
+    <meta property="og:image" content="https://rewolucja.pl{{post.image.url}}" />
 
     <!--Facebook card-->
     <meta property="og:url" content="https://rewolucja.pl{{article.get_absolute_url}}" />
     <meta property="og:type" content="post" />
     <meta property="og:title" content="{{post.title}}" />
     <meta property="og:description" content="{{post.subtitle}}" />
-    <meta property="og:image" content="https://rewolucja.pl{{post.thumbnail.url}}" />
+    <meta property="og:image" content="https://rewolucja.pl{{post.image.url}}" />
 {% endblock %}
 {% block content %}
     <div class="container-fluid">
