@@ -15,7 +15,7 @@ def random_digits():
 def index(request):
     all_posts = Post.objects.filter(status="published").order_by('-created_at')
     main_post = all_posts[0]
-    featured_posts = all_posts [1:4]
+    featured_posts = all_posts[1:4]
 
     post_list = all_posts
 

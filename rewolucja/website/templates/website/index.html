@@ -14,8 +14,10 @@
                         <img src="{% thumbnail main_post.image 900x450 box=main_post.post_thumbnail crop detail %}" alt="" class="img-fluid">
                     </div>
                     <div class="col-md-4">
-                        <h1 class="post-title-1">{{ main_post.title }}</h1>
-                        <h3 class="post-subtitle">{{ main_post.subtitle }}</h3>
+                        <div>
+                            <h1 class="post-title-1">{{ main_post.title }}</h1>
+                            <h3 class="post-subtitle">{{ main_post.subtitle }}</h3>
+                        </div>
                     </div>
             </div>
         </a>
@@ -38,10 +40,13 @@
     <!-- Infinite container -->
     <div class="container-fluid">
         <div class="infinite-container">
+
             {% for post in posts %}
                 <div class="infinite-item">
                     <div class="row">
-                        <img src="{% thumbnail post.image 900x450 box=post.post_thumbnail crop detail %}" alt="" class="img-fluid">
+                        <div class="col-md-4">
+                            <img src="{% thumbnail post.image 900x450 box=post.post_thumbnail crop detail %}" alt="" class="img-fluid">
+                        </div>
                     </div>
                 </div>
             {% endfor %}
