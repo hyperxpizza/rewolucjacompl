@@ -12,6 +12,8 @@ send_newsletter.short_description = "Wyślij newsletter do subskrybentów"
 class PostAdmin(SummernoteModelAdmin, ImageCroppingMixin, admin.ModelAdmin):
     summernote_fields = ('text',)
     prepopulated_fields = {'slug': ('title',)}
+    list_display = ['title', 'tags', 'status', 'hits', 'created_at', 'updated_at']
+    list_editable = ['status']
 
 class ProductOptionInline(admin.TabularInline):
     model = ProductOptions

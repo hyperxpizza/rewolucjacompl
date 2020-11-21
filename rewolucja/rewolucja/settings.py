@@ -179,8 +179,8 @@ from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
-
+IMAGE_CROPPING_THUMB_SIZE = (1000, 500)
 #Newsletetr/Sendgrid
-FROM_EMAIL = 'newsletter@rewolucja.com.pl'
+FROM_EMAIL_NEWSLETTER = os.environ.get("NEWSLETTER_EMAIL")
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 

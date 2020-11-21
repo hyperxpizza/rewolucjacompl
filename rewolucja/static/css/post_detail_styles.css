@@ -1,0 +1,26 @@
+/* Tags */
+.tag{
+    padding: 5px 10px 5px 10px;
+    margin-right: 20px;
+    font-size: 20px;
+    border-style: solid;
+    text-align: center;
+}
+
+.tag:hover{
+    border-color: #888a8f !important;
+    color: #888a8f !important;
+}
+
+/* Post image */
+#post-image{
+    padding-top: 20px;
+}
+
+/* Post content */
+#post-content {
+    padding-top: 30px;
+}
+#post-content p{
+    font-size: 20px;
+}

@@ -9,7 +9,14 @@
                 <h1>COL2</h1>
             </div>
             <div class="col-md-4">
-                <h1>COL3</h1>
+                <form class="input-group" method="POST" action="{% url 'website:newsletter' %}">
+                    {% csrf_token %}
+                    <input type="text" class="form-control form-control-sm" placeholder="Email"
+                      aria-label="Email" aria-describedby="basic-addon2" name="email">
+                    <div class="input-group-append">
+                      <button class="btn btn-sm btn-outline-white my-0" type="button">Bądź na bierząco</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

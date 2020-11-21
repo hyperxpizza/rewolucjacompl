@@ -14,12 +14,13 @@ def random_digits():
 
 def index(request):
     all_posts = Post.objects.filter(status="published").order_by('-created_at')
-    main_post = None
+    main_post = all_posts[0]
+    featured_posts = all_posts[1:4]
 
     post_list = all_posts
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(post_list, 3)
+    paginator = Paginator(post_list, 2)
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -28,16 +29,18 @@ def index(request):
         posts = paginator.page(paginator.num_pages)
 
     context = {
-        'posts': posts,
-        'main_post': main_post
+        'main_post': main_post,
+        'featured_posts': featured_posts,
+        'posts': posts
     }
     return render(request, 'website/index.html', context)
 
 def post_detail(request, slug):
-    post = get_object_or_404(Post, slug)
+    post = get_object_or_404(Post, slug=slug)
 
     #increment hits counter
     post.hits += 1
+    post.save()
 
     context = {
         'post': post
@@ -65,7 +68,7 @@ def view_by_tag(request, slug):
         'posts': posts
     }
 
-    return render(request, 'publishing/view_by_tag.html', context)
+    return render(request, 'website/view_by_tag.html', context)
 
 def art(request):
     art_items = ArtItem.objects.filter(visible=True).order_by('created_at')
@@ -101,9 +104,14 @@ def search(request):
 @csrf_exempt
 def newsletter_signup(request):
     if request.method == "POST":
-        new_subscriber = Subscriber(email=request.POST["email"], conf_num=random_digits())
-        new_subscriber.save()
-        new_subscriber.send_welcome_email()
+        new_email = request.POST.get('email')
+        if Subscriber.objects.filter(email=new_email).exists():
+            return
+        else:
+            new_subscriber = Subscriber(email=new_email, conf_num=random_digits())
+            new_subscriber.save()
+            new_subscriber.send_welcome_email()
+        return render(request, 'website/newsletter.html')
 
 @csrf_exempt
 def unsubscribe_newsletter(request, conf_num):

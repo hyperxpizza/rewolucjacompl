@@ -7,6 +7,15 @@
     font-family: Oswald;
 }
 
+a {
+    color: black !important;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 html {
     position: relative;
     min-height: 100%;
@@ -19,3 +28,5 @@ body {
 #main_container{
     max-width: 1380px;
 }
+
+/* SEARCH FORM */
