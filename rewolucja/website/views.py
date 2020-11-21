@@ -67,7 +67,7 @@ def view_by_tag(request, slug):
         'posts': posts
     }
 
-    return render(request, 'publishing/view_by_tag.html', context)
+    return render(request, 'website/view_by_tag.html', context)
 
 def art(request):
     art_items = ArtItem.objects.filter(visible=True).order_by('created_at')
