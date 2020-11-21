@@ -3,7 +3,24 @@
 {% load thumbnail %}
 {% block title %} {{post.title}} | Rewolucja {% endblock %}
 {% block css_files %}
-    <link rel="stylesheet" href="{% static 'css/post_detail_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/post_detail_styles.css' %}?version=2">
+{% endblock %}
+{% block meta %}
+    <!--Meta description-->
+    <meta name="description" content="{{post.subtitle}}">
+    <!--Twitter card-->
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content="https://rewolucja.pl{{article.get_absolute_url}}" />
+    <meta property="og:title" content="{{post.title}}" />
+    <meta property="og:description" content="{{post.subtitle}}" />
+    <meta property="og:image" content="https://rewolucja.pl{{post.thumbnail.url}}" />
+
+    <!--Facebook card-->
+    <meta property="og:url" content="https://rewolucja.pl{{article.get_absolute_url}}" />
+    <meta property="og:type" content="post" />
+    <meta property="og:title" content="{{post.title}}" />
+    <meta property="og:description" content="{{post.subtitle}}" />
+    <meta property="og:image" content="https://rewolucja.pl{{post.thumbnail.url}}" />
 {% endblock %}
 {% block content %}
     <div class="container-fluid">
@@ -16,7 +33,7 @@
 
                 <!--Date-->
                 <div class="row">
-                    <p>{{post.created_at}}</p>
+                    <p>{{post.created_at|date:'d-m-Y'}}</p>
                 </div>
 
                 <!--Tags-->
@@ -34,15 +51,12 @@
                 </div>
 
                 <!--Post text-->
-                <div class="row">
-                    <p id="post-content">
-                        {{post.text|safe}}
-                    </p>    
+                <div class="row" id="post-content">
+                    {{post.text|safe}}    
                 </div>
             </div>
             <!--Featured posts-->
             <div class="col-md-4">
-                
             </div>
         </div>
     </div>
