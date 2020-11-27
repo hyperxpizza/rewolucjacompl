@@ -119,7 +119,7 @@ class ProductOptions(models.Model):
     product = models.ForeignKey(Product, related_name="options", on_delete=models.CASCADE, verbose_name="Produkt")
     product_size = models.CharField(max_length=100, choices=SIZE_OPTIONS, verbose_name="Rozmiar produktu")
     stock = models.PositiveIntegerField()
-    sold_out = models.BooleanField(default=False)
+    sold_out = models.BooleanField(default=False, verbose_name="Wyprzedane")
 
     class Meta:
         verbose_name = "Opcje produktu"
@@ -132,6 +132,7 @@ class ProductOptions(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField()
+    main_image = models.BooleanField(default=False, verbose_name="Główne zdjęcie")
 
     class Meta:
         verbose_name = "Zdjęcie produktu"
@@ -211,6 +212,9 @@ class Subscriber(models.Model):
             response = sg.send(message)
             print(response)
             self.confirmed = True
+
+    def get_unsubscribe_url(self):
+        return reverse('website:unsubscribe_newsletter', args=[self.conf_num])
 
 class Newsletter(models.Model):
     title = models.TextField(blank=True, null=False, verbose_name="Tytuł")

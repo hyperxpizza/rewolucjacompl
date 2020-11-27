@@ -6,7 +6,7 @@ from taggit.models import Tag
 from .cart import Cart
 import random
 
-from .models import Post, Subscriber, ArtItem
+from .models import Post, Subscriber, ArtItem, Product, ProductCategory, ProductOptions, ProductImage
 
 #helpers
 def random_digits():
@@ -78,7 +78,10 @@ def art(request):
     return render(request, 'website/art.html', context)
 
 def store(request):
-    context = {}
+    products = Product.objects.filter(available=True)
+    context = {
+        'products': products
+    }
     return render(request, 'website/store.html', context)
 
 def order_create(request):
@@ -91,7 +94,14 @@ def send_order_notification(order):
     pass
 
 def product_detail(request, slug):
-    context = {}
+    product = get_object_or_404(Product, slug=slug)
+    images  = product.images.all()
+    options = product.options.all()
+    context = {
+        'product': product,
+        'images': images,
+        'options': options
+    }
     return render(request, 'website/product_detail', context)
 
 def about(request):
@@ -106,7 +116,13 @@ def newsletter_signup(request):
     if request.method == "POST":
         new_email = request.POST.get('email')
         if Subscriber.objects.filter(email=new_email).exists():
-            return
+            subscriber = Subscriber.objects.filter(email=new_email)
+            if not subscriber.confirmed:
+                subscriber.confirmed = True
+                subscriber.save()
+                return
+            else:
+                return
         else:
             new_subscriber = Subscriber(email=new_email, conf_num=random_digits())
             new_subscriber.save()
@@ -118,4 +134,5 @@ def unsubscribe_newsletter(request, conf_num):
     #find subscriber with given conf num
     subscriber = get_object_or_404(Subscriber, conf_num)
     subscriber.confirmed = False
+    subscriber.save()
     return render(request, 'website/unsubscribe.html')
